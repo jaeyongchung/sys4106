@@ -1,0 +1,3 @@
+[submodule "TritonRoute"]
+	path = TritonRoute
+	url = https://github.com/The-OpenROAD-Project/TritonRoute.git
