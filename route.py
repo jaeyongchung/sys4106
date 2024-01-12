@@ -132,14 +132,15 @@ def routeNet(worker, net):
         #if search(worker.gridGraph, connComps, nextPin, path, ccMazeIdx1, ccMazeIdx2, centerPt):
         if plotGraph:
             plotMyGridGraph(worker.gridGraph)
-
-        if solveRoutingProblem(worker.gridGraph, connComps, nextPin, path, ccMazeIdx1, ccMazeIdx2, centerPt):
-          worker.routeNet_postAstarUpdate(path, connComps, unConnPins, mazeIdx2unConnPins, isFirstConn) # remove nextPin from unConnPins
-          worker.routeNet_postAstarWritePath(net, path, realPinAPMazeIdx)
-          worker.routeNet_postAstarPatchMinAreaVio(net, path, areaMap)
-          isFirstConn = False
+            break
         else:
-          return False
+            if solveRoutingProblem(worker.gridGraph, connComps, nextPin, path, ccMazeIdx1, ccMazeIdx2, centerPt):
+              worker.routeNet_postAstarUpdate(path, connComps, unConnPins, mazeIdx2unConnPins, isFirstConn) # remove nextPin from unConnPins
+              worker.routeNet_postAstarWritePath(net, path, realPinAPMazeIdx)
+              worker.routeNet_postAstarPatchMinAreaVio(net, path, areaMap)
+              isFirstConn = False
+            else:
+              return False
     worker.routeNet_postRouteAddPathCost(net)
     return True
 
